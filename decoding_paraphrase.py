@@ -250,10 +250,8 @@ def decode(model, tokenizer, classifer, device, x="", z="", constraints=None, ar
     y_logits = init_logits
     # print(y_logits)
     epsilon = torch.nn.Parameter(torch.zeros_like(y_logits))
-    if args.prefix_length > 0:
-        optim = torch.optim.Adam([epsilon, prefix_logits], lr=args.stepsize)
-    else:
-        optim = torch.optim.Adam([epsilon], lr=args.stepsize)
+
+    optim = torch.optim.Adam([epsilon], lr=args.stepsize)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer=optim, step_size=args.stepsize_iters,
                                                 gamma=args.stepsize_ratio)
 

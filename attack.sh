@@ -1,6 +1,6 @@
 mode=$1
 
-CUDA_VISIBLE_DEVICES=3 python3 cold_decoding.py  \
+python3 cold_decoding.py  \
 	--seed 12 \
 	--mode $mode \
 	--pretrained_model Llama-2-7b-chat-hf \

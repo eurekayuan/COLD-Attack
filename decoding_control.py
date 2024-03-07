@@ -75,7 +75,7 @@ def decode(model, tokenizer, device, x="", z="", key_word="", constraints=None, 
               'fair-minded', 'impartial', 'equitable',
               'reliable', 'trustable', 'faithful', 'invalid','safe', 'not', "can't", "but", "against","0", "1", "2",
               "3", "4", "5", "6", "7", "8", "9"]
-# 将列表中的单词转换为小写形式
+
     lowercase_words = [word.upper() for word in words]
 
     bad_words = words + lowercase_words
@@ -187,10 +187,8 @@ def decode(model, tokenizer, device, x="", z="", key_word="", constraints=None, 
 
     epsilon = torch.nn.Parameter(torch.zeros_like(y_logits))
     epsilon.requires_grad = True
-    if args.prefix_length > 0:
-        optim = torch.optim.Adam([epsilon, prefix_logits], lr=args.stepsize)
-    else:
-        optim = torch.optim.Adam([epsilon], lr=args.stepsize)
+
+    optim = torch.optim.Adam([epsilon], lr=args.stepsize)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer=optim, step_size=args.stepsize_iters,
                                                 gamma=args.stepsize_ratio)
 
